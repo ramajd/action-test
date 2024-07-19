@@ -10,13 +10,14 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.test }}
       output2: ${{ steps.step2.outputs.test }}
-      dbg1: "HI"
-      DEBUG_MODE: "ON"
+      output3: ${{ steps.step3.outputs.debug_mode }}
     steps:
       - id: step1
         run: echo "test=hello" >> "$GITHUB_OUTPUT"
       - id: step2
         run: echo "test=world" >> "$GITHUB_OUTPUT"
+      - id: step3
+        run: echo "debug_mode=ON" >> "$GITHUB_OUTPUT"
   job2:
     runs-on: ubuntu-latest
     needs: job1
@@ -24,6 +25,5 @@ jobs:
       - env:
           OUTPUT1: ${{needs.setup_env.outputs.output1}}
           OUTPUT2: ${{needs.setup_env.outputs.output2}}
-          DEBUG_MODE: ${{needs.setup_env.outputs.DEBUG_MODE}}
-          dbg1: ${{needs.setup_env.outputs.dbg1}}
-        run: echo "$OUTPUT1 $OUTPUT2 - $DEBUG_MODE - $dbg1"
+          DEBUG_MODE: ${{needs.setup_env.outputs.outputs3}}
+        run: echo "$OUTPUT1 $OUTPUT2 - $DEBUG_MODE"
