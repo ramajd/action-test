@@ -25,5 +25,5 @@ jobs:
       - env:
           OUTPUT1: ${{needs.setup_env.outputs.output1}}
           OUTPUT2: ${{needs.setup_env.outputs.output2}}
-          DEBUG_MODE: ${{needs.setup_env.outputs.outputs3}}
+          DEBUG_MODE: ${{needs.setup_env.outputs.output3}}
         run: echo "$OUTPUT1 $OUTPUT2 - $DEBUG_MODE"
